@@ -1,0 +1,8 @@
+---
+interface:
+proto:
+action: ACCEPT
+saddr:
+daddr:
+dport:
+sport:

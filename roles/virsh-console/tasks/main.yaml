@@ -1,0 +1,6 @@
+---
+- name: ensure console access set
+  service: name=serial-getty@ttyS0 enabled=yes
+
+- name: ensure console access updated
+  service: name=serial-getty@ttyS0 state=started
