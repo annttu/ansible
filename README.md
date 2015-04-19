@@ -2,6 +2,9 @@
 
 Collection of ansible roles and playbooks I have found to be useful.
 
+Roles are tested on Debian Jessie.
+
+
 ## Credits
  - Antti Jaakkola (Annttu)
  - Joonas Järveläinen (jonttu)
@@ -51,6 +54,20 @@ virsh-console
 
 Setup libvirt virtual to have getty on virtual serial console ttyS0.
 
+ldap_users
+----
+
+Setup pam authentication against ldap and nscd and nslcd to use ldap.
+
+#### Variables
+
+| name | description | example |
+| -- | -- | -- |
+| ca_crt | Local path to ca file | /etc/ca.crt |
+| ldap_ca | Remote path to ca file | /etc/ldap/ca.crt (default) |
+| ldap_server | LDAP server(s) URI | ldaps://ldap.example.com |
+| ldap_base | LDAP base dn | dc=example,dc=com |
+| login_groups | List of groups allowed to login | sysadmin
 
 License
 ===

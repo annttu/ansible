@@ -1,0 +1,2 @@
+---
+ ldap_ca: /etc/ldap/ca.crt

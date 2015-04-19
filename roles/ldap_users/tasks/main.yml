@@ -1,0 +1,25 @@
+---
+- name: Install requirements
+  apt: pkg={{item}} state=installed
+  with_items:
+   - "libpam-ldap"
+   - "libnss-ldapd"
+
+- name: copy ca.crt
+  copy: src="{{ ca_crt }}" dest=/etc/ldap/ca.crt
+
+- name: config ldap.conf
+  template: src=ldap.conf dest=/etc/ldap/ldap.conf
+
+- name: config nsswitch.conf
+  copy: src=nsswitch.conf dest=/etc/nsswitch.conf
+
+- name: config pam_ldap.conf
+  template: src=pam_ldap.conf dest=/etc/pam_ldap.conf
+
+- name: config nslcd.conf
+  template: src=nslcd.conf dest=/etc/nslcd.conf
+  notify:
+   - restart nslcd
+   - restart nscd
+
