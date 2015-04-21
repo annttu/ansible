@@ -69,6 +69,29 @@ Setup pam authentication against ldap and nscd and nslcd to use ldap.
 | ldap_base | LDAP base dn | dc=example,dc=com |
 | login_groups | List of groups allowed to login | sysadmin
 
+fail2ban
+----
+
+Install and setup fail2ban.
+
+#### Variables
+
+    fail2ban:
+      ignored_hosts:
+         - 127.0.0.0/8
+         - x.y.z.i/24
+      bantime: 3600
+      maxretry: 10
+      destemail: root@localhost
+      banaction: iptables-multiport
+    
+      services:
+       - ssh:
+         port: ssh
+         logpath: /var/log/auth.log
+         filter: sshd
+
+
 License
 ===
 

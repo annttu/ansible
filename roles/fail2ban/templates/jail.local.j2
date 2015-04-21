@@ -1,0 +1,28 @@
+# File managed by ansible
+
+[DEFAULT]
+
+ignoreip = {% for host in fail2ban.ignored_hosts %}{{ host }} {% endfor %}
+
+banaction = {{ fail2ban.banaction }}
+
+mta = sendmail
+
+protocol = tcp
+
+chain = INPUT
+
+{% for service in fail2ban.services %}
+{% if "ssh" in service %}
+[ssh]
+enabled = true
+port = {% if "port" in service %}{{ service.port }}{% else %}ssh{% endif %}
+
+filter = {% if "filter" in service %}{{ service.filter }}{% else %}sshd{% endif %}
+
+logpath = {% if "logpath" in service %}{{ service.logpath }}{% else %}/var/log/auth.log{% endif %}
+
+maxretry = {% if "maxretry" in service %}{{ service.maxretry }}{% else %}{{ fail2ban.maxretry }}{% endif %}
+
+{% endif %}
+{% endfor %}

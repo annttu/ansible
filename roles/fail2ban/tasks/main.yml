@@ -1,0 +1,8 @@
+---
+ - name: install fail2ban
+   apt: pkg=fail2ban state=installed
+
+ - name: configure jail.local
+   template: src=jail.local.j2 dest=/etc/fail2ban/jail.local mode=644 owner=root group=root
+   notify:
+     - restart fail2ban

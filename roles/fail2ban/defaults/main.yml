@@ -1,0 +1,14 @@
+---
+fail2ban:
+   ignored_hosts:
+    - 127.0.0.0/8
+
+   bantime: 3600
+   maxretry: 10
+   destemail: root@localhost
+   banaction: iptables-multiport
+   services:
+    ssh:
+     port: ssh
+     logpath: /var/log/auth.log
+     maxretry: 10
