@@ -37,16 +37,16 @@ Add to role's meta/main.yml
 
 #### Variables
 
-| name  |   description | example |
-|-------|---------------| - |
-| name  |	name for service | someservice | 
-| interface | Interface for incoming traffic | eth0
-| daddr | Destination address | 10.0.0.1 |
-| saddr | Source address | 10.0.0.0/24 |
-| dport | Destination port | 5555 |
-| sport | source port | 5555 |
-| proto | Protocol, tcp, udp, icmp| tcp |
-| chain | Firewall chain, input, output, forward, input6, output6, forward6 | input |
+|  name     |   description | example |
+| --------- | ------------- | ------- |
+| name      |	name for service | someservice | 
+| interface | Interface for incoming traffic | eth0 |
+| daddr     | Destination address | 10.0.0.1 |
+| saddr     | Source address | 10.0.0.0/24 |
+| dport     | Destination port | 5555 |
+| sport     | source port | 5555 |
+| proto     | Protocol, tcp, udp, icmp | tcp |
+| chain     | Firewall chain, input, output, forward, input6, output6, forward6 | input |
 
 
 virsh-console
@@ -106,7 +106,7 @@ Uses quite a dynamic plugin configuration via host_vars or group_vars.
 #### Variables
 
 | name  | type | description | example | required |
-| -- | -- | -- | -- | -- |
+| ----- | ---- | ------------| -------- | ------- |
 | server_port | int | Port where nrpe server listens | 5666 ( default ) | no |
 | user_groups | list | Groups which nagios user should have | Debian-exim | no |
 | plugins | list | a list of plugin entries | see [below](#plugin variables) | yes |
