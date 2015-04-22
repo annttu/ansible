@@ -122,6 +122,25 @@ Uses quite a dynamic plugin configuration via host_vars or group_vars.
 | critical | string | critical limit | | 20% | no |
 | args     | string | plugin arguments | | -p /dev/sda1 | no |
 
+#### Example config
+
+    nagios_nrpe:
+     server_port: 5555
+     allowed_hosts:
+      - 10.0.0.1
+     user_groups:
+      - Debian-exim
+     plugins:
+      - name: users
+        critical: 30
+        warning: 10
+      - name: mailq
+        args: -M exim
+        critical: 100
+        warning: 10
+     sudo_plugins:
+      - name: apt
+        args: -u -t 60
 
 munin-node
 ----------
