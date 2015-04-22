@@ -1,0 +1,7 @@
+
+{% macro plugin_path(plugin) -%}
+{% if
+"path" not in plugin %}/usr/lib/nagios/plugins/check_{{ plugin.name }}{% else
+%}{% if "/" in plugin.path %}{{ plugin.path }}{% else
+%}/usr/lib/nagios/plugins/{{ plugin.path }}{% endif %}{% endif %}
+{% endmacro %}

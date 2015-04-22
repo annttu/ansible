@@ -1,0 +1,3 @@
+---
+nagios_nrpe:
+ server_port: 5666

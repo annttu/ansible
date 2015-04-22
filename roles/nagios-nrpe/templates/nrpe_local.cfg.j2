@@ -1,0 +1,25 @@
+# File managed by ansible
+{% import "nrpe_macros.j2" as nrpe_macros with context %}
+{% macro nrpe_plugin(plugin, sudo=false) -%}
+    command[{% if "check_" not in plugin.name %}check_{% endif %}{{ plugin.name }}]={% if sudo %}sudo {% endif %}{{ nrpe_macros.plugin_path(plugin) }} {% if
+"warning" in plugin %}-w {{ plugin.warning }}{% endif %}{% if "critical" in
+plugin %} -c {{ plugin.critical }}{% endif %} {% if "args" in plugin %} {{
+plugin.args }} {% endif %}
+{%- endmacro %}
+
+{% if "server_port" in nagios_nrpe %}
+server_port={{ nagios_nrpe.server_port }}
+{% endif %}
+
+{% if "allowed_hosts" in nagios_nrpe %}
+allowed_hosts={% for host in nagios_nrpe.allowed_hosts %}{{ host }}{% if not loop.last %},{% endif %}{% endfor%}
+{% endif %}
+
+{% for plugin in nagios_nrpe.plugins %}
+{{ nrpe_plugin(plugin, false) }}
+{% endfor %}
+
+{% for plugin in nagios_nrpe.sudo_plugins %}
+{{ nrpe_plugin(plugin, true) }}
+
+{% endfor %}

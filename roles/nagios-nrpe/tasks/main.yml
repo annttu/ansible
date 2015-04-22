@@ -1,0 +1,31 @@
+---
+ - name: install nagios-nrpe
+   apt: pkg=nagios-nrpe-server state=installed
+
+ - name: install nagios plugins
+   apt: pkg={{ item }} state=installed
+   with_items:
+    - nagios-plugins
+    - nagios-plugins-common
+    - nagios-plugins-basic
+    - nagios-plugins-standard
+
+ - name: configure nagios-nrpe
+   template: src=nrpe_local.cfg.j2 dest=/etc/nagios/nrpe_local.cfg owner=root group=root mode=0644
+   notify:
+    - restart nagios-nrpe-server
+
+
+ - name: nagios user to groups
+   user: name=nagios groups={{ item }} append=yes
+   with_items: nagios_nrpe.user_groups
+   when: '"user_groups" in nagios_nrpe'
+
+ - name: install sudo
+   apt: pkg=sudo state=installed
+   when: '"sudo_plugins" in nagios_nrpe'
+
+ - name: sudo permissions
+   template: src=nrpe_sudo dest=/etc/sudoers.d/nagios_nrpe owner=root group=root mode=0640
+   when: '"sudo_plugins" in nagios_nrpe'
+
