@@ -1,0 +1,7 @@
+---
+ - name: install sudo
+   apt: pkg=sudo state=installed
+
+ - name: add to sudoers.d
+   template: src=sudo-command.j2 dest="/etc/sudoers.d/{{ name }}" owner=root group=root mode=0640
+   when: name is defined and user is defined

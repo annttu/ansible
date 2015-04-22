@@ -1,0 +1,5 @@
+# File managed by ansible::sudo
+
+# allow sudo for {{ user }} {% if command %} with command {{ command }} {% endif %}
+
+{{ user }} ALL = ( ALL ) {% if nopasswd %}NOPASSWD: {% endif %}{% if command %}{{ command }}{% endif %}

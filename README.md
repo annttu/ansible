@@ -4,6 +4,7 @@ Collection of ansible roles and playbooks I have found to be useful.
 
 Roles are tested on Debian Jessie.
 
+Requires python package on remote host.
 
 ## Credits
  - Antti Jaakkola (Annttu)
@@ -159,6 +160,28 @@ NTP
 ----
 
 Install a ntp package to host.
+
+
+Sudo
+-----
+
+Install sudo package and provide per user or per app sudo permissions using dependencies.
+
+##### example usage
+
+Add to your role's meta/main.yml
+
+    dependencies:
+     - { role: sudo, name: somename, user: someuser, command: "somecommand", nopasswd: true }
+
+#### Variables
+
+| name     | type   | description   | default | example | required | 
+| -------- | ------ | ------------- | ------- | ------- | -------- |
+| name | string | name for file | | apt-dater-sudo | yes |
+| user | string | username for sudo permission | | someuser | yes |
+| command | string | allow sudo only for this command | | /usr/bin/apt-get | no |
+| nopasswd | boolean | enable sudo without password | false | true | no |
 
 
 License
