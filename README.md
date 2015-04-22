@@ -62,12 +62,12 @@ Setup pam authentication against ldap and nscd and nslcd to use ldap.
 #### Variables
 
 | name | description | example |
-| -- | -- | -- |
+| ---- | ----------- | ------- |
 | ca_crt | Local path to ca file | /etc/ca.crt |
 | ldap_ca | Remote path to ca file | /etc/ldap/ca.crt (default) |
 | ldap_server | LDAP server(s) URI | ldaps://ldap.example.com |
 | ldap_base | LDAP base dn | dc=example,dc=com |
-| login_groups | List of groups allowed to login | sysadmin
+| login_groups | List of groups allowed to login | sysadmin |
 
 fail2ban
 ----
@@ -106,7 +106,7 @@ Uses quite a dynamic plugin configuration via host_vars or group_vars.
 #### Variables
 
 | name  | type | description | example | required |
-| ----- | ---- | ------------| -------- | ------- |
+| ----- | ---- | ----------- | ------- | ------- |
 | server_port | int | Port where nrpe server listens | 5666 ( default ) | no |
 | user_groups | list | Groups which nagios user should have | Debian-exim | no |
 | plugins | list | a list of plugin entries | see [below](#plugin variables) | yes |
@@ -114,13 +114,13 @@ Uses quite a dynamic plugin configuration via host_vars or group_vars.
 
 
 #### Plugin variables
-| name  | type | description | default | example | required |
-| -- | -- | -- | -- | -- |
-| name | string | Name of plugin, automatically prefixed with "check\_" | | disk | yes |
-| path | string | partial or full path to plugin | /usr/lib/nagios/plugins/check_{{ name }} | /usr/lib/nagios/plugins/check_disk or disk |  no |
-| warning | string | warning limit |  | 10% | no |
+| name     | type   | description | default | example | required |
+| -------- | ------ | ----------- | ------- | ------- | -------- |
+| name     | string | Name of plugin, automatically prefixed with "check\_" | | disk | yes |
+| path     | string | partial or full path to plugin | /usr/lib/nagios/plugins/check_{{ name }} | /usr/lib/nagios/plugins/check_disk or disk |  no |
+| warning  | string | warning limit |  | 10% | no |
 | critical | string | critical limit | | 20% | no |
-| args | string | plugin arguments | | -p /dev/sda1 |
+| args     | string | plugin arguments | | -p /dev/sda1 | no |
 
 License
 ===
