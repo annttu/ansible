@@ -122,6 +122,13 @@ Uses quite a dynamic plugin configuration via host_vars or group_vars.
 | critical | string | critical limit | | 20% | no |
 | args     | string | plugin arguments | | -p /dev/sda1 | no |
 
+
+NTP
+----
+
+Install a ntp package to host.
+
+
 License
 ===
 
