@@ -1,0 +1,4 @@
+---
+dependencies:
+ - { role: sudo, name: apt-dater-apt, user: apt-dater, command: "/usr/bin/apt-get", nopasswd: true }
+ - { role: sudo, name: apt-dater-aptitude, user: apt-dater, command: "/usr/bin/aptitude", nopasswd: true }

@@ -184,6 +184,32 @@ Add to your role's meta/main.yml
 | nopasswd | boolean | enable sudo without password | false | true | no |
 
 
+apt-dater-host 
+-------
+
+Install and configure remote for apt-dater. Uses separate apt-dater user for ssh.
+
+#### Variables
+
+Variables are prefixed with apt_dater_host.
+
+| name     | type   | description   | default | example | required | 
+| -------- | ------ | ------------- | ------- | ------- | -------- |
+| username | string | name of the user in remote system | apt-dater | apt-dater | no |
+| home     | string | home dir path of the user | /var/lib/apt-dater | /home/apt-dater | no |
+| ssh_key  | string | public key for apt-dater | | ssh-rsa AAA... | yes |
+
+##### example usage
+
+In site.yml
+
+    - role apt-dater-host
+    
+in host_vars or group_vars
+
+    apt_dater_host:
+     ssh_key: ssh-rsa AAAA...
+
 License
 ===
 

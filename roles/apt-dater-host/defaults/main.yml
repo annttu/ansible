@@ -1,0 +1,3 @@
+---
+apt_dater_host:
+ home: "/var/lib/apt-dater"

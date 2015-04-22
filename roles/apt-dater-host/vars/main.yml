@@ -1,0 +1,5 @@
+---
+apt_dater_host:
+ username: "{% if 'username' in apt_dater_host %}{{ apt_dater_host.username }}{% else %}apt-dater{% endif %}"
+ home: "{% if 'home' in apt_dater_host %}{{ apt_dater_host.home }}{% else %}/var/lib/apt-dater{% endif %}"
+ ssh_key: "{{ apt_dater_host.ssh_key }}"
