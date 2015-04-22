@@ -109,8 +109,8 @@ Uses quite a dynamic plugin configuration via host_vars or group_vars.
 | ----- | ---- | ----------- | ------- | ------- |
 | server_port | int | Port where nrpe server listens | 5666 ( default ) | no |
 | user_groups | list | Groups which nagios user should have | Debian-exim | no |
-| plugins | list | a list of plugin entries | see [below](#plugin variables) | yes |
-| sudo_plugins | list | a list of plugin entries which requires sudo | see [below](#plugin variables) | no |
+| plugins | list | a list of plugin entries | see [below](#plugin-variables) | yes |
+| sudo_plugins | list | a list of plugin entries which requires sudo | see [below](#plugin-variables) | no |
 
 
 #### Plugin variables
@@ -121,6 +121,19 @@ Uses quite a dynamic plugin configuration via host_vars or group_vars.
 | warning  | string | warning limit |  | 10% | no |
 | critical | string | critical limit | | 20% | no |
 | args     | string | plugin arguments | | -p /dev/sda1 | no |
+
+
+munin-node
+----------
+
+Install and configure munin-node
+
+#### variables
+
+| name     | type   | description   | default | example | required | 
+| -------- | ------ | ------------- | ------- | ------- | -------- |
+| master_address | ip-address | master ip-address without netmask | | 10.0.0.2 | yes |
+
 
 
 NTP

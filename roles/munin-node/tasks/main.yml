@@ -1,0 +1,24 @@
+---
+ - name: install munin-node
+   apt: pkg=munin-node state=installed
+
+ - name: install requirements
+   apt: pkg={{ item }} state=installed
+   with_items:
+    - gawk
+    - libio-multiplex-perl
+    - libio-socket-inet6-perl
+    - liblist-moreutils-perl
+    - libnet-cidr-perl
+    - libnet-server-perl
+    - libsigsegv2
+    - libsocket6-perl
+    - munin-common
+    - munin-plugins-core
+
+ - name: allow master to connect
+   lineinfile: dest=/etc/munin/munin-node.conf
+    regexp="^cidr_allow {{ munin_node.master_address }}/32"
+    line="cidr_allow {{ munin_node.master_address }}/32"
+   notify:
+     - restart munin-node
