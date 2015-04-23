@@ -1,3 +1,5 @@
+# {{ ansible_managed }}
+
 {% import "nrpe_macros.j2" as nrpe_macros with context %}
 {% for plugin in nagios_nrpe.sudo_plugins %}
 

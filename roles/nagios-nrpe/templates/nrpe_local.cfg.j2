@@ -1,4 +1,4 @@
-# File managed by ansible
+# {{ ansible_managed }}
 {% import "nrpe_macros.j2" as nrpe_macros with context %}
 {% macro nrpe_plugin(plugin, sudo=false) -%}
     command[{% if "check_" not in plugin.name %}check_{% endif %}{{ plugin.name }}]={% if sudo %}sudo {% endif %}{{ nrpe_macros.plugin_path(plugin) }} {% if
