@@ -1,0 +1,70 @@
+# {{ ansible_managed }}
+
+auto lo
+iface lo inet loopback
+
+{% for name, interface in network.interfaces.items() %}
+
+allow-hotplug {{ name }}
+{% if 'ip' in interface and 'dhcp' not in interface %}
+iface {{ name }} inet static
+    address {{ interface.ip }}
+    netmask {{ interface.mask }}
+{% if 'gateway' in interface %}
+    gateway {{ interface.gateway }}
+{% endif %}
+{% if 'network' in interface %}
+    network {{ interface.network }}
+{% endif %}
+{% if 'broadcast' in interface %}
+    broadcast {{ interface.broadcast }}
+{% endif %}
+{% if 'mtu' in interface %}
+    mtu {{ interface.mtu }}
+{% endif %}
+{% elif 'dhcp' in interface %}
+iface {{ name }} inet dhcp
+{% endif %}
+
+{% if 'ip6' in interface %}
+iface {{ name }} inet6 static
+    address {{ interface.ip6 }}
+    netmask {% if 'mask6' in interface %}{{ interface.mask6 }}{% else %}64{% endif %}
+
+{% if 'gateway6' in interface %}
+    gateway {{ interface.gateway6 }}
+{% endif %}
+{% if 'mtu' in interface %}
+    mtu {{ interface.mtu }}
+{% endif %}
+{% if 'accept_ra' in interface %}
+    accept_ra {% if interface.accept_ra == 'yes' or interface.accept_ra == true %}1{% elif interface.accept_ra == 'no' or interface.accept_ra == false %}0{% else %}{{ interface.accept_ra }}{% endif %}
+{% endif %}
+{% if 'autoconf' in interface %}
+    autoconf {% if interface.autoconf == 'yes' or interface.autoconf == true  %}1{% else %}0{% endif %}
+{% endif %}
+{% if 'privext' in interface %}
+    privext {% if interface.privext == 'yes' or interface.privext == true %}1{% elif interface.privext == 'no' or interface.privext == false %}0{% else %}{{ interface.privext }}{% endif %}
+{% endif %}
+{% elif 'auto6' in interface %}
+iface {{ name }} inet6 auto
+{% if 'accept_ra' in interface %}
+    accept_ra {% if interface.accept_ra == 'yes' or interface.accept_ra == true %}1{% elif interface.accept_ra == 'no' or interface.accept_ra == false %}0{% else %}{{ interface.accept_ra }}{% endif %}
+{% endif %}
+{% if 'autoconf' in interface %}
+    autoconf {% if interface.autoconf == 'yes' or interface.autoconf == true  %}1{% else %}0{% endif %}
+{% endif %}
+{% if 'stateless_dhcp' in interface %}
+    dhcp {% if interface.stateless_dhcp == 'yes' or interface.stateless_dhcp == true %}1{% else %}0{% endif %}
+{% endif %}
+{% elif 'dhcp6' in interface %}
+iface {{ name }} inet6 dhcp
+{% if 'accept_ra' in interface %}
+    accept_ra {% if interface.accept_ra == 'yes' or interface.accept_ra == true %}1{% elif interface.accept_ra == 'no' or interface.accept_ra == false %}0{% else %}{{ interface.accept_ra }}{% endif %}
+{% endif %}
+{% if 'autoconf' in interface %}
+    autoconf {% if interface.autoconf == 'yes' or interface.autoconf == true  %}1{% else %}0{% endif %}
+{% endif %}
+{% endif %}
+
+{% endfor %}

@@ -210,6 +210,50 @@ in host_vars or group_vars
     apt_dater_host:
      ssh_key: ssh-rsa AAAA...
 
+
+network
+-----
+
+Configure /etc/networking/interfaces etc.
+
+#### Variables
+
+| name     | type   | description   | default | example | required | 
+| -------- | ------ | ------------- | ------- | ------- | -------- |
+| interfaces | list | list of interfaces |  | see [interface variables](#interface-variables) | yes |
+| dns_servers | list | list of dns-server addresses | | | no |
+| domain | string | Domain name | | | no |
+
+
+#### interface variables
+
+| name     | type   | description   | default | example | required | 
+| -------- | ------ | ------------- | ------- | ------- | -------- |
+| interface | string | Interface name |  | eth0 | yes |
+| ip | ipv4 address | Interface IPv4 address |  | 10.0.0.2 | yes |  
+| mask | integer or hostmask | IPv4 address mask |  | 24 or 255.255.255.0 | yes |
+| gateway | IPv4 address | gateway address | | 10.0.0.1 | no |
+| dhcp | boolean | Use dhcp to acquire address, if true ip, netmask and gateway are ignored | false | true | no |
+| mtu | integer | Interface mtu | | | no |
+| boardcast | ipv4 address | IPv4 broadcast address | | 10.0.0.255 | no |
+| boardcast | ipv4 address | IPv4 network address | | 10.0.0.0 | no |
+| auto6 | ipv6 autoconf | 
+| ip6 | ipv6 address | Interface IPv6 address | | 2001:DB8::10:2 | no |
+| mask6 | integer | Interface IPv6 address mask | 64 | 64 | no |
+| gateway6 | ipv6 address | gateway IPv6 address | 2001:DB8::1 | no |
+| accept_ra | boolean, integer |  accept router advertisements | true, false, 0, 1 2 | no |
+| autoconf | boolean | IPv6 autoconf | true, false | no |
+| privext | boolean, integer | Use IPv6 privacy extension (RFC3041) | true, false, 0, 1, 2 | no |
+
+
+TODO
+===
+
+* lldpd
+* munin master
+* icinga ( master )
+* icinga2
+
 License
 ===
 
