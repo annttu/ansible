@@ -22,3 +22,6 @@
     line="cidr_allow {{ munin_node.master_address }}/32"
    notify:
      - restart munin-node
+
+ - name: check munin-node is running
+   service: name=munin-node state=running
