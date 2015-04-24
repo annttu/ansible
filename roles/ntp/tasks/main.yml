@@ -1,3 +1,6 @@
 ---
  - name: install ntpd
    apt: pkg=ntp state=installed
+
+ - name: configure ntp
+   template: src=ntp.conf.j2 dest=/etc/ntp.conf owner=root group=root mode=640

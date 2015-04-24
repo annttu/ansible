@@ -1,0 +1,45 @@
+---
+
+# For variable checking
+ntp_server_options:
+ - iburst
+ - burst
+ - true
+ - xleave
+ - autokey
+ - noselect
+ - preempt
+ntp_server_options_with_value:
+ - key
+ - minpoll
+ - maxpoll
+ - mode
+ - prefer
+ - ttl
+ - version
+
+ntp_restriction_modes:
+ - kod
+ - noquery
+ - nomodify
+ - notrap
+ - noserve
+ - nopeer
+ - notrust
+ - limited
+ - ntpport
+ - version
+ - ignore
+ - lowpriotrap
+
+ntp:
+ servers:
+  - address: 0.pool.ntp.org
+    iburst: true
+  - address: 1.pool.ntp.org
+    iburst: true
+  - address: 2.pool.ntp.org
+    iburst: true
+  - address: 3.pool.ntp.org
+    iburst: true
+    true: true

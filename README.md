@@ -150,17 +150,74 @@ Install and configure munin-node
 
 #### variables
 
+In munin block
+
 | name     | type   | description   | default | example | required | 
 | -------- | ------ | ------------- | ------- | ------- | -------- |
 | master_address | ip-address | master ip-address without netmask | | 10.0.0.2 | yes |
 
+#### Example usage
+
+    munin:
+     master_address: 10.0.0.2
 
 
 NTP
 ----
 
-Install a ntp package to host.
+Install and configure a ntp server for host.
 
+#### Variables
+
+| name     | type   | description   | default | example | required | 
+| -------- | ------ | ------------- | ------- | ------- | -------- |
+| servers | list of servers | list of servers, see [server variables](#ntp_server_variables) | 4 pool.ntp.org servers |  | no |
+| peers | list of peers | list of peers, see [server variables](#ntp_server_variables) | | no |
+| restrict | list of restrictons | see [restrict variables](#ntp_restrict_variables) | allow local, deny others | | no |
+
+#### server varables [ntp_server_variables] ####
+
+| name     | type   | description   | default | example | required | 
+| -------- | ------ | ------------- | ------- | ------- | -------- |
+| address | ip or hostname | peer or server address | | 10.0.0.1 | yes | 
+| iburst | boolean | use iburst | false | false | no | 
+| burst | boolean | use iburst | false | false | no |
+| true | boolean | Force  the  association to assume truechimer status | false | false | no | 
+| xleave | boolean | Operate in interleaved mode | false | false | no | 
+| key | string | key string | no |  | no | 
+| autokey | boolean | use autokey option | false | false | no | 
+| minpoll | int | minimum polling interval, in seconds as a power of two | | 10 | no | 
+| maxpoll | int | maximum polling interval, in seconds as a power of two | | 20 | no | 
+| mode | string | Pass option to a reference clock driver | | | no | 
+| noselect | boolean | only display peer/server but don't use | false | false | no | 
+| preempt | boolean | Preempt server/peer | false | false | no | 
+| ttl | int | ttl used in broadcast and anycast mode | | | no | 
+| version | string | specify allowed version | | | no | 
+
+More information on:
+
+    man 5 ntp.conf
+
+#### restrict varables [ntp_restrict_variables] ####
+
+| name     | type   | description   | default | example | required | 
+| -------- | ------ | ------------- | ------- | ------- | -------- |
+| address | ip or hostname | Client ip or hostname.  | | 10.0.0.1  | yes |
+| mask | hostmask | Optional hostmask if ip is a network.  | | 255.255.255.0 | no |
+| kod | boolean | send kiss of death packet to denied host. | false | true | no |
+| noquery | boolean | Don't allow queries. | false | false | no |
+| nomodify | boolean | Don't allow modifications. |false | false | no |
+| notrap | boolean | Don't allow control message traps. | false | false | no |
+| noserve | boolean | Don't provide time service. | false | false | no |
+| nopeer | boolean | Provide stateless service but don't accept as peer. | false | false | no |
+| notrust | boolean | Don't allow unauthenticated packages. | false | false | no |
+| limited | boolean | see doc | false | false | no |
+| ntpport | boolean | Accept only queries from port NTP port (123) | false | false | no |
+| version | boolean | Ignore these hosts if not the current NTP version. | false | false | no |
+| ignore | boolean | Ignore all packets from hosts. | false | false | no |
+| lowpriotrap | boolean | | false | false | no |
+
+More information in [doc.ntp.org](http://doc.ntp.org/4.1.1/accopt.htm)
 
 Sudo
 -----
