@@ -175,7 +175,7 @@ Install and configure a ntp server for host.
 | peers | list of peers | list of peers, see [server variables](#ntp_server_variables) | | no |
 | restrict | list of restrictons | see [restrict variables](#ntp_restrict_variables) | allow local, deny others | | no |
 
-#### ntp server varables ####
+#### ntp server variables ####
 
 | name     | type   | description   | default | example | required | 
 | -------- | ------ | ------------- | ------- | ------- | -------- |
@@ -198,7 +198,7 @@ More information on:
 
     man 5 ntp.conf
 
-#### ntp restrict varables ####
+#### ntp restrict variables ####
 
 | name     | type   | description   | default | example | required | 
 | -------- | ------ | ------------- | ------- | ------- | -------- |
