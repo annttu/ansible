@@ -32,6 +32,17 @@ ntp_restriction_modes:
  - ignore
  - lowpriotrap
 
+ntp_fudge_options:
+ - time1
+ - time2
+ - stratum
+ - refid
+ - mode
+ - flag1
+ - flag2
+ - flag3
+ - flag4
+
 ntp:
  servers:
   - address: 0.pool.ntp.org

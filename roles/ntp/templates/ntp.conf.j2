@@ -14,13 +14,11 @@ filegen clockstats file clockstats type day enable
 # You do need to talk to an NTP server or two (or three).
 #server ntp.your-provider.example
 
-# {{ ntp }}
-
 {% if 'servers' in ntp %}
 {% for server in ntp.servers %}
 {% if 'comment' in server %}# {{ server.comment }}
 {% endif %}
-server {{ server.address }} {% for option, value in server.items() %}{% if option in ntp_server_options %} {{  option }}{% elif option in ntp_server_options_with_value %}{{ option }}={{ value }}{% endif %}{% endfor %}
+server {{ server.address }} {% for option, value in server.items() %}{% if option in ntp_server_options %} {{  option }}{% elif option in ntp_server_options_with_value %}{{ option }} {{ value }} {% endif %}{% endfor %}
 
 {% endfor %}
 {% else %}
@@ -34,11 +32,17 @@ server 3.pool.ntp.org iburst
 {% for peer in ntp.peers %}
 {% if 'comment' in peer %}# {{ peer.comment }}
 {% endif %}
-peer {{ peer.address }} {% for option, value in peer.items() %}{% if option in ntp_server_options %}{{ option }} {% elif option in ntp_server_options_with_value %}{{ option }}={{ value }} {% endif %} {% endfor %}
+peer {{ peer.address }} {% for option, value in peer.items() %}{% if option in ntp_server_options %}{{ option }} {% elif option in ntp_server_options_with_value %}{{ option }} {{ value }} {% endif %} {% endfor %}
 
 {% endfor %}
 {% endif %}
 
+{% if 'fudge' in ntp %}
+{% for fudge in ntp.fudge %}
+fudge {{ fudge.address }} {% for option, value in fudge.items() %}{% if option in ntp_fudge_options %}{{ option }} {{ value }} {% endif %}{% endfor %}
+
+{% endfor %}
+{% endif %}
 
 # Default to disallow anything
 restrict -4 default kod notrap nomodify nopeer noquery
@@ -49,7 +53,7 @@ restrict -6 default kod notrap nomodify nopeer noquery
 {% for item in ntp.restrict %}
 {% if 'comment' in item %}# {{ item.comment }}
 {% endif %}
-restrict {{ item.ip }}{% if 'mask' in item %} mask {{ item.mask }} {% endif %}{% for option in item %}{% if option in ntp_restriction_modes %}{{ option }}{% endif %} {% endfor %}
+restrict {{ item.ip }}{% if 'mask' in item %} mask {{ item.mask }} {% endif %}{% for option in item %}{% if option in ntp_restriction_modes %}{{ option }} {% endif %} {% endfor %}
 
 {% endfor %}
 {% else %}
