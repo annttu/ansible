@@ -277,9 +277,9 @@ Configure /etc/networking/interfaces etc.
 
 | name     | type   | description   | default | example | required | 
 | -------- | ------ | ------------- | ------- | ------- | -------- |
-| interfaces | list | list of interfaces |  | see [interface variables](#interface-variables) | yes |
-| dns_servers | list | list of dns-server addresses | | | no |
-| domain | string | Domain name | | | no |
+| network_interfaces | list | list of interfaces |  | see [interface variables](#interface-variables) | yes |
+| network_dns_servers | list | list of dns-server addresses | | | no |
+| network_domain | string | Domain name | | | no |
 
 
 #### interface variables
@@ -294,6 +294,7 @@ Configure /etc/networking/interfaces etc.
 | mtu | integer | Interface mtu | | | no |
 | boardcast | ipv4 address | IPv4 broadcast address | | 10.0.0.255 | no |
 | boardcast | ipv4 address | IPv4 network address | | 10.0.0.0 | no |
+| parent | Interface | Parent interface for vlan-interface | | eth0 | no |
 | auto6 | ipv6 autoconf | 
 | ip6 | ipv6 address | Interface IPv6 address | | 2001:DB8::10:2 | no |
 | mask6 | integer | Interface IPv6 address mask | 64 | 64 | no |

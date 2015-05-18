@@ -4,7 +4,7 @@
 
  - name: config /etc/resolv.conf
    template: src=resolv.conf.j2 dest=/etc/resolv.conf owner=root group=root
-   when: "'dns_servers' in network"
+   when: "'network_dns_servers' is defined"
 
 # Todo:
 # ra

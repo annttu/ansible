@@ -3,9 +3,9 @@
 auto lo
 iface lo inet loopback
 
-{% for name, interface in network.interfaces.items() %}
+{% for name, interface in network_interfaces.items() %}
 
-allow-hotplug {{ name }}
+auto {{ name }}
 {% if 'ip' in interface and 'dhcp' not in interface %}
 iface {{ name }} inet static
     address {{ interface.ip }}
@@ -22,8 +22,19 @@ iface {{ name }} inet static
 {% if 'mtu' in interface %}
     mtu {{ interface.mtu }}
 {% endif %}
+{% if 'parent' in interface %}
+    vlan_raw_device {{ interface.parent }}
+{% endif %}
 {% elif 'dhcp' in interface %}
 iface {{ name }} inet dhcp
+{% if 'parent' in interface %}
+    vlan_raw_device {{ interface.parent }}
+{% endif %}
+{% elif 'manual' in interface %}
+iface {{ name }} inet manual
+{% if 'parent' in interface %}
+    vlan_raw_device {{ interface.parent }}
+{% endif %}
 {% endif %}
 
 {% if 'ip6' in interface %}
@@ -65,6 +76,9 @@ iface {{ name }} inet6 dhcp
 {% if 'autoconf' in interface %}
     autoconf {% if interface.autoconf == 'yes' or interface.autoconf == true  %}1{% else %}0{% endif %}
 {% endif %}
+{% endif %}
+{% if 'parent' in interface %}
+    vlan_raw_device {{ interface.parent }}
 {% endif %}
 
 {% endfor %}
