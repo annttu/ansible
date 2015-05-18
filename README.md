@@ -303,6 +303,31 @@ Configure /etc/networking/interfaces etc.
 | autoconf | boolean | IPv6 autoconf | true, false | no |
 | privext | boolean, integer | Use IPv6 privacy extension (RFC3041) | true, false, 0, 1, 2 | no |
 
+packages
+-------
+
+Install configured packages.
+
+#### Variables
+
+
+| name     | type   | description   | default | example | required | 
+| -------- | ------ | ------------- | ------- | ------- | -------- |
+| install_packages | list | List of packages to install | ... | ... | no |
+
+##### example usage
+
+In site.yml
+
+    - role apt-dater-host
+    
+in host_vars or group_vars
+
+    apt_dater_host:
+     ssh_key: ssh-rsa AAAA...
+
+
+
 
 TODO
 ===

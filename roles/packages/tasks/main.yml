@@ -1,0 +1,6 @@
+- name: Install packages
+  apt: pkg={{ item }} state=installed
+  with_items: install_packages
+  when: install_packages is defined
+  tags:
+   - packages
