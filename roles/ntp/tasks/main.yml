@@ -8,7 +8,11 @@
  - name: configure ntp
    template: src=ntp.conf.j2 dest=/etc/ntp.conf owner=root group=root mode=640
    notify:
+<<<<<<< HEAD
     - restart ntp
    tags:
     - config
     - ntp
+=======
+     - restart ntp
+>>>>>>> f3a3708cfaa8b63b250652927cfa00745f5d55e4
