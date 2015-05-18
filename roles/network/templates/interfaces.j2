@@ -19,6 +19,13 @@ iface {{ name }} inet static
 {% if 'broadcast' in interface %}
     broadcast {{ interface.broadcast }}
 {% endif %}
+{% if 'dns_servers' in interface %}
+    dns-nameservers{% for server in interface.dns_servers %} {{ server }}{% endfor %}
+
+{% endif %}
+{% if 'dns_search' in interface %}
+    dns-search {{ interface.dns_search }}
+{% endif %}
 {% if 'mtu' in interface %}
     mtu {{ interface.mtu }}
 {% endif %}
@@ -44,6 +51,9 @@ iface {{ name }} inet6 static
 
 {% if 'gateway6' in interface %}
     gateway {{ interface.gateway6 }}
+{% endif %}
+{% if 'dns_servers_6' in interface %}
+    dns-nameservers{% for server in interface.dns_servers_6 %} {{ server }}{% endfor %}
 {% endif %}
 {% if 'mtu' in interface %}
     mtu {{ interface.mtu }}

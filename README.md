@@ -291,6 +291,8 @@ Configure /etc/networking/interfaces etc.
 | mask | integer or hostmask | IPv4 address mask |  | 24 or 255.255.255.0 | yes |
 | gateway | IPv4 address | gateway address | | 10.0.0.1 | no |
 | dhcp | boolean | Use dhcp to acquire address, if true ip, netmask and gateway are ignored | false | true | no |
+| dns_servers | list of strings | List of dns-nameservers | | | no |
+| dns_search | string | dns-search value | | | no |
 | mtu | integer | Interface mtu | | | no |
 | boardcast | ipv4 address | IPv4 broadcast address | | 10.0.0.255 | no |
 | boardcast | ipv4 address | IPv4 network address | | 10.0.0.0 | no |
