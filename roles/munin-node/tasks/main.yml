@@ -23,5 +23,5 @@
    notify:
      - restart munin-node
 
- - name: check munin-node is running
+ - name: ensure munin-node is running
    service: name=munin-node state=running
