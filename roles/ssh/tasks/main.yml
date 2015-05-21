@@ -1,0 +1,31 @@
+---
+ - name: install openssh-server
+   apt: pkg=openssh-server state=installed
+   tags:
+    - "ssh"
+    - "packages"
+
+ - name: Disable SSH root login without password
+   lineinfile: >
+      dest=/etc/ssh/sshd_config
+      regexp='^PermitRootLogin .*$'
+      line="PermitRootLogin without-password" state=present
+
+   tags:
+    - "config"
+    - "ssh"
+   notify:
+    - restart sshd
+
+ - name: Set UseDNS no
+   lineinfile: >
+    dest=/etc/ssh/sshd_config
+    regexp='^UseDNS .*$'
+    line='UseDNS no'
+    state=present
+   when: ssh_usedns == false
+   tags:
+    - "config"
+    - "ssh"
+   notify:
+    - restart sshd

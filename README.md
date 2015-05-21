@@ -48,6 +48,7 @@ Add to role's meta/main.yml
 | sport     | source port | 5555 |
 | proto     | Protocol, tcp, udp, icmp | tcp |
 | chain     | Firewall chain, input, output, forward, input6, output6, forward6 | input |
+| action    | Firewall action: DROP, ACCEPT | ACCEPT |
 
 
 virsh-console
@@ -329,6 +330,23 @@ in host_vars or group_vars
      ssh_key: ssh-rsa AAAA...
 
 
+ssh
+---
+
+Install Openssh-server
+
+#### Variables
+
+
+| name     | type   | description   | default | example | required |
+| -------- | ------ | ------------- | ------- | ------- | -------- |
+| ssh_usedns: | bool | set to no to disable UseDNS | no | yes | no |
+
+##### example usage
+
+In site.yml
+
+    - role ssh
 
 
 TODO
