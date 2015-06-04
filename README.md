@@ -159,8 +159,26 @@ In munin block
 
 #### Example usage
 
-    munin:
+    munin_node:
      master_address: 10.0.0.2
+
+munin-master
+----------
+
+Install and configure munin-node
+
+#### variables
+
+In munin block
+
+| name      | type    | description   | default | example | required | 
+| --------- | ------- | ------------- | ------- | ------- | -------- |
+| rrdcached | boolean | Use rrdcached | true    | true    | false    |
+
+#### Example usage
+
+    munin_master:
+     rrdcached: false
 
 
 NTP

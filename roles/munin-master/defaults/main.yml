@@ -1,0 +1,2 @@
+munin_master:
+ rrdcached: true

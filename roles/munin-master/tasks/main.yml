@@ -1,0 +1,16 @@
+---
+ - name: install munin-master
+   apt: pkg=munin state=installed
+
+ - name: configure munin
+   template: src=munin.conf.j2 dest=/etc/munin/munin-conf.d/clients.conf owner=root group=root
+
+ - name: remove localhost.localdomain
+   replace: dest=/etc/munin/munin.conf regexp='^\[localhost.localdomain\](\n.*)+\n\n' replace="\n"
+
+ - name: install rrdcached
+   apt: pkg=rrdcached state=installed
+   when: '"rrdcached" in munin_master and munin_master.rrdcached == true'
+
+ - name: configure munin to user rrdcached
+   template: src=rrdcached.conf.j2 dest=/etc/munin/munin-conf.d/rrdcached.conf owner=root group=root

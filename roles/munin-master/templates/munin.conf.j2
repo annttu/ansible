@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+
+{% for host in groups['all'] %}
+{%- for variable in hostvars[host] %}
+{%- if variable == 'munin_node' -%}
+{%- if 'master_address' in hostvars[host]['munin_node'] -%}
+{% if hostvars[host]['munin_node']['master_address'] in ansible_all_ipv4_addresses %}
+[{{ host }}{% if 'domain' in hostvars[host]['munin_node'] %};{{ hostvars[host]['munin_node']['domain'] }}{% endif %}]
+  use_node_name yes
+  address {{ host }}{% if 'domain' in hostvars[host]['munin_node'] %}.{{ hostvars[host]['munin_node']['domain'] }}{% endif %}
+
+
+{% endif -%}
+{%- endif -%}
+{%- endif -%}
+{%- endfor -%}
+{%- endfor %}
