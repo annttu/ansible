@@ -1,2 +1,4 @@
 ---
 ssh_usedns: no
+ssh_all_password_login: yes
+ssh_x11forwarding: no

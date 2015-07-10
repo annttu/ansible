@@ -1,31 +1,94 @@
 ---
- - name: install openssh-server
-   apt: pkg=openssh-server state=installed
-   tags:
-    - "ssh"
-    - "packages"
+- name: install openssh-server
+  apt: pkg=openssh-server state=installed
+  tags:
+   - "ssh"
+   - "packages"
 
- - name: Disable SSH root login without password
-   lineinfile: >
+- name: Disable SSH root login without password
+  lineinfile: >
       dest=/etc/ssh/sshd_config
       regexp='^PermitRootLogin .*$'
       line="PermitRootLogin without-password" state=present
 
-   tags:
+  tags:
     - "config"
     - "ssh"
-   notify:
+  notify:
     - restart sshd
 
- - name: Set UseDNS no
-   lineinfile: >
+- name: Set UseDNS no
+  lineinfile: >
     dest=/etc/ssh/sshd_config
     regexp='^UseDNS .*$'
     line='UseDNS no'
     state=present
-   when: ssh_usedns == false
-   tags:
+  when: ssh_usedns == false
+  tags:
     - "config"
     - "ssh"
-   notify:
+  notify:
+    - restart sshd
+
+- name: Disable PasswordAuthentication
+  lineinfile: >
+    dest=/etc/ssh/sshd_config
+    regexp='^PasswordAuthentication .*$'
+    line='PasswordAuthentication no'
+    state=present
+  when: ssh_all_password_login == false
+  tags:
+    - "config"
+    - "ssh"
+  notify:
+    - restart sshd
+
+- name: Disable ChallengeResponseAuthentication
+  lineinfile: >
+    dest=/etc/ssh/sshd_config
+    regexp='^ChallengeResponseAuthentication .*$'
+    line='ChallengeResponseAuthentication no'
+    state=present
+  tags:
+    - "config"
+    - "ssh"
+  notify:
+    - restart sshd
+
+
+- name: Disable Empty passwords
+  lineinfile: >
+    dest=/etc/ssh/sshd_config
+    regexp='^PermitEmptyPasswords .*$'
+    line='PermitEmptyPasswords no'
+    state=present
+  tags:
+    - "config"
+    - "ssh"
+  notify:
+    - restart sshd
+
+- name: Disable X11 forwarding
+  lineinfile: >
+    dest=/etc/ssh/sshd_config
+    regexp='^X11Forwarding .*$'
+    line='X11Forwarding no'
+    state=present
+  when: ssh_x11forwarding == false
+  tags:
+    - "config"
+    - "ssh"
+  notify:
+    - restart sshd
+
+- name: Enable PubkeyAuthentication
+  lineinfile: >
+    dest=/etc/ssh/sshd_config
+    regexp='^PubkeyAuthentication .*$'
+    line='PubkeyAuthentication yes'
+    state=present
+  tags:
+    - "config"
+    - "ssh"
+  notify:
     - restart sshd

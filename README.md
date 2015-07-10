@@ -358,7 +358,9 @@ Install Openssh-server
 
 | name     | type   | description   | default | example | required |
 | -------- | ------ | ------------- | ------- | ------- | -------- |
-| ssh_usedns: | bool | set to no to disable UseDNS | no | yes | no |
+| ssh_usedns | bool | set to no to disable UseDNS | no | yes | no |
+| ssh_all_password_login | bool | enable password logins |  yes | yes | no |
+| ssh_x11forwarding | bool | enable password logins | no | yes | no |
 
 ##### example usage
 
