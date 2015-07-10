@@ -377,6 +377,28 @@ TODO
 * icinga ( master )
 * icinga2
 
+vars plugins
+============
+
+keychain_sudo.py
+------
+
+Plugin that fetches sudo passwords from OS X keychain.
+
+#### Usage
+
+Add path to vars_plugins to your ansible.conf file.
+
+[defaults]
+vars_plugins = path/to/vars_plugins
+
+And configure usage for hosts on hosts file.
+
+[all:vars]
+ansible_ask_sudo_pass=true
+use_keychain=true
+
+
 License
 ===
 
