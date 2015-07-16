@@ -1,15 +1,25 @@
 ---
  - name: install apt-dater-host
    apt: pkg=apt-dater-host state=installed
+   tags:
+    - apt-dater
 
  - name: apt-dater user
    user: system=true createhome=yes home="{{ apt_dater_host.home }}" name="{{ apt_dater_host.username }}" state=present shell=/bin/sh comment="Apt-dater user,,,"
+   tags:
+    - apt-dater
 
  - name: ensure sudo installed
    apt: pkg=sudo state=installed
+   tags:
+    - apt-dater
 
  - name: ensure .ssh dir
    file: state=directory path="{{ apt_dater_host.home }}/.ssh/" owner="{{ apt_dater_host.username }}" group=apt-dater mode=0700
+   tags:
+    - apt-dater
 
  - name: install ssh-key
    authorized_key: key="{{ apt_dater_host.ssh_key }}" user="{{ apt_dater_host.username }}" state=present
+   tags:
+    - apt-dater
