@@ -64,8 +64,17 @@ class VarsModule(object):
 
     def get_host_vars(self, host, vault_password=None):
         """ Get host specific variables. """
+        print("SYS.ARGS: %s" % sys.args)
         use_keychain = host.get_variables().get("use_keychain")
         hostname = host.get_variables().get('inventory_hostname')
+        if '-l' in sys.argv:
+            # Check if only limited set of hosts is required for this run and get password only for them
+            # quite a dirty way to accomplish that...
+            limit = sys.argv[sys.argv.index('-l')+1].split(",")[0]
+            found = False
+            m = re.match(limit.replace("*", ".*"), hostname)
+            if m is None:
+                return
         if use_keychain and use_keychain.lower() in ['true', 'yes']:
             if VarsModule.sudo_password_cache.get(hostname) is None:
                 user, passwd = KeyChain.get_credentials(host.get_variables()['inventory_hostname'])
