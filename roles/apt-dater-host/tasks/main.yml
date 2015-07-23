@@ -40,6 +40,6 @@
      - apt-dater
 
  - name: config $FORBID_UPGRADE
-   lineinfile: dest=/etc/apt-dater-host.conf regexp="\$FORBID_UPGRADE.*" line="$FORBID_UPGARDE={% if apt_dater_host_vars.forbid_upgrade %}1{% else %}0{% endif %};" state=present
+   lineinfile: dest=/etc/apt-dater-host.conf regexp="\$FORBID_UPGRADE.*" line="$FORBID_UPGRADE={% if apt_dater_host_vars.forbid_upgrade %}1{% else %}0{% endif %};" state=present
    tags:
      - apt-dater
