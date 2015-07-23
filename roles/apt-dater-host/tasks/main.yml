@@ -1,11 +1,15 @@
 ---
+
+ - name: check ssh_key set
+   fail: msg="apt_dater_host.ssh_key is required!"
+   when: "'ssh_key' not in apt_dater_host"
  - name: install apt-dater-host
    apt: pkg=apt-dater-host state=installed
    tags:
     - apt-dater
 
  - name: apt-dater user
-   user: system=true createhome=yes home="{{ apt_dater_host.home }}" name="{{ apt_dater_host.username }}" state=present shell=/bin/sh comment="Apt-dater user,,,"
+   user: system=true createhome=yes home="{{ apt_dater_host_vars.home }}" name="{{ apt_dater_host_vars.username }}" state=present shell=/bin/sh comment="Apt-dater user,,,"
    tags:
     - apt-dater
 
@@ -15,11 +19,27 @@
     - apt-dater
 
  - name: ensure .ssh dir
-   file: state=directory path="{{ apt_dater_host.home }}/.ssh/" owner="{{ apt_dater_host.username }}" group=apt-dater mode=0700
+   file: state=directory path="{{ apt_dater_host_vars.home }}/.ssh/" owner="{{ apt_dater_host_vars.username }}" group=apt-dater mode=0700
    tags:
     - apt-dater
 
  - name: install ssh-key
-   authorized_key: key="{{ apt_dater_host.ssh_key }}" user="{{ apt_dater_host.username }}" state=present
+   authorized_key: key="{{ apt_dater_host_vars.ssh_key }}" user="{{ apt_dater_host_vars.username }}" state=present
    tags:
     - apt-dater
+
+ - name: configure Cluster
+   lineinfile: dest=/etc/apt-dater-host.conf regexp="@CLUSTERS.*" line="@CLUSTERS = qw({{ apt_dater_host.cluster }});" state=present
+   when: "'cluster' in apt_dater_host"
+   tags:
+     - apt-dater
+
+ - name: config $FORBID_INSTALL
+   lineinfile: dest=/etc/apt-dater-host.conf regexp="\$FORBID_INSTALL.*" line="$FORBID_INSTALL={% if apt_dater_host_vars.forbid_install %}1{% else %}0{% endif %};" state=present
+   tags:
+     - apt-dater
+
+ - name: config $FORBID_UPGRADE
+   lineinfile: dest=/etc/apt-dater-host.conf regexp="\$FORBID_UPGRADE.*" line="$FORBID_UPGARDE={% if apt_dater_host_vars.forbid_upgrade %}1{% else %}0{% endif %};" state=present
+   tags:
+     - apt-dater

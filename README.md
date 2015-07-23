@@ -274,6 +274,8 @@ Variables are prefixed with apt_dater_host.
 | username | string | name of the user in remote system | apt-dater | apt-dater | no |
 | home     | string | home dir path of the user | /var/lib/apt-dater | /home/apt-dater | no |
 | ssh_key  | string | public key for apt-dater | | ssh-rsa AAA... | yes |
+| forbid_install | bool | Forbid installing new packaged | false | true | no |
+| forbid_upgrade | bool | Forbid upgrading system using apt-dater | false | true | no |
 
 ##### example usage
 

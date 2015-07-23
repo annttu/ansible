@@ -1,5 +1,7 @@
 ---
-apt_dater_host:
- username: "{% if 'username' in apt_dater_host %}{{ apt_dater_host.username }}{% else %}apt-dater{% endif %}"
+apt_dater_host_vars:
+ username: "{% if apt_dater_host is defined %}{% if 'username' in apt_dater_host %}{{ apt_dater_host.username }}{% else %}apt-dater{% endif %}{% else %}apt-dater{% endif %}"
  home: "{% if 'home' in apt_dater_host %}{{ apt_dater_host.home }}{% else %}/var/lib/apt-dater{% endif %}"
- ssh_key: "{{ apt_dater_host.ssh_key }}"
+ ssh_key: "{% if 'ssh_key' in apt_dater_host %}{{ apt_dater_host.ssh_key }}{% endif %}"
+ forbid_install: "{% if 'forbid_install' in apt_dater_host %}{{ apt_dater_host.forbid_install }}{% else %}false{% endif %}"
+ forbid_upgrade: "{% if 'forbid_install' in apt_dater_host %}{{ apt_dater_host.forbid_upgrade }}{% else %}false{% endif %}"
