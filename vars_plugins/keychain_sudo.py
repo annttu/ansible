@@ -64,7 +64,6 @@ class VarsModule(object):
 
     def get_host_vars(self, host, vault_password=None):
         """ Get host specific variables. """
-        print("SYS.ARGS: %s" % sys.args)
         use_keychain = host.get_variables().get("use_keychain")
         hostname = host.get_variables().get('inventory_hostname')
         if '-l' in sys.argv:
