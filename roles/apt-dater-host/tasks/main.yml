@@ -35,11 +35,11 @@
      - apt-dater
 
  - name: config $FORBID_INSTALL
-   lineinfile: dest=/etc/apt-dater-host.conf regexp="\$FORBID_INSTALL.*" line="$FORBID_INSTALL={% if apt_dater_host_vars.forbid_install %}1{% else %}0{% endif %};" state=present
+   lineinfile: dest=/etc/apt-dater-host.conf regexp="\$FORBID_INSTALL.*" line="$FORBID_INSTALL={{ apt_dater_host_vars.forbid_install }};" state=present
    tags:
      - apt-dater
 
  - name: config $FORBID_UPGRADE
-   lineinfile: dest=/etc/apt-dater-host.conf regexp="\$FORBID_UPGRADE.*" line="$FORBID_UPGRADE={% if apt_dater_host_vars.forbid_upgrade %}1{% else %}0{% endif %};" state=present
+   lineinfile: dest=/etc/apt-dater-host.conf regexp="\$FORBID_UPGRADE.*" line="$FORBID_UPGRADE={{ apt_dater_host_vars.forbid_upgrade }};" state=present
    tags:
      - apt-dater
