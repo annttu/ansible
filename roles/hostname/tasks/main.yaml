@@ -2,6 +2,9 @@
   - name: set hostname
     shell: hostname {{ hostname | mandatory }}
     when: ansible_fqdn != "{{ hostname }}"
+    tags:
+     - hostname
+     - basics
 
 
   - name: configure mailname
@@ -12,6 +15,9 @@
       group=root
       mode=0644
     when: ansible_fqdn != "{{ hostname }}"
+    tags:
+     - hostname
+     - basics
 
   - name: edit hosts file 127.0.0.1
     lineinfile: >
@@ -20,6 +26,9 @@
        line="127.0.0.1    {{hostname}} {{hostname | regex_replace('^([^\.]+)\..*', '\\1') }} localhost localhost.localdomain"
        state=present
     when: ansible_fqdn != "{{ hostname }}"
+    tags:
+     - hostname
+     - basics
 
   - name: edit hosts file ::1
     lineinfile: >
@@ -28,3 +37,6 @@
        line="::1    {{ hostname }} {{hostname | regex_replace('^([^\.]+)\..*', '\\1') }} localhost ip6-localhost localhost.localdomain"
        state=present
     when: ansible_fqdn != "{{ hostname }}"
+    tags:
+     - hostname
+     - basics
