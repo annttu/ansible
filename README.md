@@ -419,6 +419,7 @@ And configure usage for hosts on hosts file.
 ansible_ask_sudo_pass=true
 use_keychain=true
 
+Also remove ask_sudo_pass from defaults if defined.
 
 License
 ===
