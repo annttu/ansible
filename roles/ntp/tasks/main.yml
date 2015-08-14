@@ -12,3 +12,7 @@
    tags:
     - config
     - ntp
+
+
+ - name: ensure ntp is enabled
+   service: name=ntp enabled=yes
