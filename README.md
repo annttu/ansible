@@ -403,6 +403,17 @@ In site.yml
     roles:
      - etckeeper
 
+nginx
+--- 
+
+Install nginx web-server. Currently does not support configuration.
+
+### example usage
+
+In site.yml
+
+    roles:
+     - nginx
 
 TODO
 ===

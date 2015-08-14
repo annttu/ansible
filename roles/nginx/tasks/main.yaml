@@ -1,0 +1,7 @@
+---
+- fail: msg="Unsupported Operating system"
+  when: ansible_os_family not in supported_systems
+
+- include: apt.yaml
+  when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"
+
