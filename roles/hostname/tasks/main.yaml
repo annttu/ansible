@@ -1,0 +1,30 @@
+---
+  - name: set hostname
+    shell: hostname {{ hostname | mandatory }}
+    when: ansible_fqdn != "{{ hostname }}"
+
+
+  - name: configure mailname
+    template: >
+      src=templates/mailname.j2
+      dest=/etc/mailname
+      owner=root
+      group=root
+      mode=0644
+    when: ansible_fqdn != "{{ hostname }}"
+
+  - name: edit hosts file 127.0.0.1
+    lineinfile: >
+       dest=/etc/hosts
+       regexp='^127\.0\.0\.1\W'
+       line="127.0.0.1    {{hostname}} {{hostname | regex_replace('^([^\.]+)\..*', '\\1') }} localhost localhost.localdomain"
+       state=present
+    when: ansible_fqdn != "{{ hostname }}"
+
+  - name: edit hosts file ::1
+    lineinfile: >
+       dest=/etc/hosts
+       regexp='^::1\W'
+       line="::1    {{ hostname }} {{hostname | regex_replace('^([^\.]+)\..*', '\\1') }} localhost ip6-localhost localhost.localdomain"
+       state=present
+    when: ansible_fqdn != "{{ hostname }}"

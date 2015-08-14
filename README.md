@@ -342,7 +342,8 @@ Install configured packages.
 
 In site.yml
 
-    - role apt-dater-host
+    roles:
+      - apt-dater-host
     
 in host_vars or group_vars
 
@@ -368,8 +369,26 @@ Install Openssh-server
 
 In site.yml
 
-    - role ssh
+    roles:
+     - ssh
 
+hostname
+--- 
+
+Set system hostname.
+
+### Variables
+
+| name     | type   | description   | default | example | required |
+| -------- | ------ | ------------- | ------- | ------- | -------- |
+| hostname | string | System hostname fqdn | none | testing.localdomain | yes |
+
+### example usage
+
+In site.yml
+
+    roles:
+     - hostname
 
 TODO
 ===
