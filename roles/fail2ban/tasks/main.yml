@@ -1,11 +1,17 @@
 ---
  - name: install fail2ban
    apt: pkg=fail2ban state=installed
+   tags:
+    - packages
+    - fail2ban
 
  - name: configure jail.local
    template: src=jail.local.j2 dest=/etc/fail2ban/jail.local mode=644 owner=root group=root
    notify:
      - restart fail2ban
+   tags:
+     - fail2ban
 
- - name: ensure fail2ban is running
-   service: name=fail2ban state=running
+# Fails dry-run
+# - name: ensure fail2ban is running
+#   service: name=fail2ban state=running
