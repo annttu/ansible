@@ -390,6 +390,20 @@ In site.yml
     roles:
      - hostname
 
+
+etckeeper
+--- 
+
+Install etckeeper with git.
+
+### example usage
+
+In site.yml
+
+    roles:
+     - etckeeper
+
+
 TODO
 ===
 
