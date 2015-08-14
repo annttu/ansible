@@ -415,6 +415,26 @@ In site.yml
     roles:
      - nginx
 
+there
+--- 
+
+There is a simple multiuser commandline password manager. [There in github](https://github.com/cybercom-finland/there/). This role installs newest there from github.
+
+### Variables
+
+| name     | type   | description   | default | example | required |
+| -------- | ------ | ------------- | ------- | ------- | -------- |
+| there_path | string | Path to where there stores passwords | /opt/there | /opt/there | no |
+| there_group | string | An Unix group which members have access to password directory | there | there | no |
+
+### example usage
+
+In site.yml
+
+    roles:
+     - there
+
+
 TODO
 ===
 

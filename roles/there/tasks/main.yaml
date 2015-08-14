@@ -1,0 +1,72 @@
+---
+ - name: Check variables
+   fail: msg='{{ item }} not defined'
+   when: item is not defined
+   with_items:
+    - there_group
+    - there_path
+   tags:
+    - there
+
+ - name: Check if already installed
+   stat: path=/usr/local/bin/there
+   register: there_bin_path
+   tags:
+    - there
+
+ - name: Install required packages
+   apt: pkg={{ item }} state=installed
+   with_items:
+    - perl
+    - cpanminus
+    - "libncurses5-dev"
+    - "libcurses-perl"
+    - "libcurses-ui-perl"
+    - "libcrypt-random-source-perl"
+    - "libdigest-sha-perl"
+    - "libappconfig-perl"
+   tags:
+    - there
+    - packages
+
+ - name: Install required dependencies from CPAN
+   cpanm: name={{ item }}
+   with_items:
+    - "Math::Pari"
+    - "Crypt::Random"
+    - "Crypt::Rijndael"
+    - "Object::Generic"
+   tags:
+    - there
+    - packages
+
+ - name: Ensure group exists
+   group: name={{ there_group }} state=present system=true
+   tags:
+    - there
+
+ # Create directory with g+s bit
+ - name: Create installation directory
+   file: path={{ there_path }} mode=2770 state=directory owner=root group={{ there_group }}
+   when: there_bin_path.stat.exists != True
+   tags:
+    - there
+
+ - name: "Fetch there"
+   git: repo="https://github.com/cybercom-finland/there.git" dest="{{there_path}}/there"
+   when: there_bin_path.stat.exists != True
+   tags:
+    - there
+
+ - name: Run make
+   script: make.sh "{{ there_path }}/there" creates="{{ there_path }}/make.log"
+   when: there_bin_path.stat.exists != True
+   tags:
+    - there
+
+ - name: Remove build directory
+   file: dest="{{there_path}}/there" state=absent
+   tags:
+    - there
+
+
