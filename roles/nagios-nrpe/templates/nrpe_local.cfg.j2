@@ -15,11 +15,16 @@ server_port={{ nagios_nrpe.server_port }}
 allowed_hosts={% for host in nagios_nrpe.allowed_hosts %}{{ host }}{% if not loop.last %},{% endif %}{% endfor%}
 {% endif %}
 
+{% if 'plugins' in nagios_nrpe %}
 {% for plugin in nagios_nrpe.plugins %}
 {{ nrpe_plugin(plugin, false) }}
-{% endfor %}
 
+{% endfor %}
+{% endif %}
+
+{% if 'sudo_plugins' in nagios_nrpe %}
 {% for plugin in nagios_nrpe.sudo_plugins %}
 {{ nrpe_plugin(plugin, true) }}
 
 {% endfor %}
+{% endif %}
