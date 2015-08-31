@@ -53,4 +53,3 @@ ntp:
     iburst: true
   - address: 3.pool.ntp.org
     iburst: true
-    true: true
