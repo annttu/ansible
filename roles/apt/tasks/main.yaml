@@ -1,0 +1,6 @@
+---
+
+- name: Set no recommends and no suggests config
+  template: src=01norecommend dest=/etc/apt/apt.conf.d/01norecommend owner=root group=root
+  tags:
+    - apt
