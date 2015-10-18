@@ -69,10 +69,13 @@ class VarsModule(object):
         if '-l' in sys.argv:
             # Check if only limited set of hosts is required for this run and get password only for them
             # quite a dirty way to accomplish that...
-            limit = sys.argv[sys.argv.index('-l')+1].split(",")[0]
             found = False
-            m = re.match(limit.replace("*", ".*"), hostname)
-            if m is None:
+            for limit in sys.argv[sys.argv.index('-l')+1].split(","):
+                m = re.match(limit.replace("*", ".*"), hostname)
+                if m is not None:
+                    found = True
+                    break
+            if not found:
                 return
         if use_keychain and use_keychain.lower() in ['true', 'yes']:
             if VarsModule.sudo_password_cache.get(hostname) is None:
