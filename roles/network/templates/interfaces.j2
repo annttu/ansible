@@ -32,15 +32,51 @@ iface {{ name }} inet static
 {% if 'parent' in interface %}
     vlan_raw_device {{ interface.parent }}
 {% endif %}
+{% if 'post_up' in interface %}
+    post-up {{ interface.post_up }}
+{% endif %}
+{% if 'post_down' in interface %}
+    post-down {{ interface.post_down }}
+{% endif %}
+{% if 'pre_up' in interface %}
+    pre-up {{ interface.pre_up }}
+{% endif %}
+{% if 'pre_down' in interface %}
+    pre-down {{ interface.pre_down }}
+{% endif %}
 {% elif 'dhcp' in interface %}
 iface {{ name }} inet dhcp
 {% if 'parent' in interface %}
     vlan_raw_device {{ interface.parent }}
 {% endif %}
+{% if 'post_up' in interface %}
+    post-up {{ interface.post_up }}
+{% endif %}
+{% if 'post_down' in interface %}
+    post-down {{ interface.post_down }}
+{% endif %}
+{% if 'pre_up' in interface %}
+    pre-up {{ interface.pre_up }}
+{% endif %}
+{% if 'pre_down' in interface %}
+    pre-down {{ interface.pre_down }}
+{% endif %}
 {% elif 'manual' in interface %}
 iface {{ name }} inet manual
 {% if 'parent' in interface %}
     vlan_raw_device {{ interface.parent }}
+{% endif %}
+{% if 'post_up' in interface %}
+    post-up {{ interface.post_up }}
+{% endif %}
+{% if 'post_down' in interface %}
+    post-down {{ interface.post_down }}
+{% endif %}
+{% if 'pre_up' in interface %}
+    pre-up {{ interface.pre_up }}
+{% endif %}
+{% if 'pre_down' in interface %}
+    pre-down {{ interface.pre_down }}
 {% endif %}
 {% endif %}
 
