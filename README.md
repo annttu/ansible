@@ -343,12 +343,13 @@ Install configured packages.
 In site.yml
 
     roles:
-      - apt-dater-host
-    
+      - packages
+
 in host_vars or group_vars
 
-    apt_dater_host:
-     ssh_key: ssh-rsa AAAA...
+    install_packages:
+      - vim
+      - screen
 
 
 ssh
