@@ -435,6 +435,28 @@ In site.yml
     roles:
      - there
 
+apt
+---
+
+Set various configuration parameters for apt-get
+
+
+### Variables
+
+| name     | type   | description   | default | example | required |
+| -------- | ------ | ------------- | ------- | ------- | -------- |
+| apt_install_suggested | boolean | Setup if apt should install suggested packages by default | false | false | no |
+| apt_install_recommends | boolean | Setup if apt should install recommend packages by default | false | false | no |
+
+
+### example usage
+
+In site.yml
+
+    roles:
+     - apt
+
+
 
 TODO
 ===

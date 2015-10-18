@@ -1,0 +1,3 @@
+---
+apt_install_suggested: false
+apt_install_recommends: false
