@@ -3,3 +3,5 @@
   template: src=ferm_service.conf dest="/etc/ferm/{{ chain }}/{{ name }}.conf"
   notify:
    - restart ferm
+  tags:
+   - firewall
