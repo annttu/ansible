@@ -457,6 +457,23 @@ In site.yml
      - apt
 
 
+timezone
+---
+
+Set system timezone.
+
+### Variables
+
+| name     | type   | description   | default | example | required |
+| -------- | ------ | ------------- | ------- | ------- | -------- |
+| timezone | string | Timezone name | UTC | Europe/Helsinki | no |
+
+### example usage
+
+In site.yml
+
+    timezone: Europe/Helsinki
+
 
 TODO
 ===

@@ -1,0 +1,22 @@
+---
+
+ - name: check timezone exists
+   stat: path="/usr/share/zoneinfo/{{ timezone }}"
+   register: zonefile
+   tags:
+     - timezone
+
+ - fail: msg="timezone {{ timezone }} not found!"
+   when: not zonefile.stat.exists
+   tags:
+     - timezone
+
+ - name: Set timezone
+   copy: >
+     src="/usr/share/zoneinfo/{{ timezone }}"
+     dest="/etc/localtime"
+     owner=root
+     group=root
+     mode=0644
+   tags:
+     - timezone
