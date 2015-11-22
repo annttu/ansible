@@ -22,7 +22,12 @@ Combined with ferm_service module, ferm provides easy to use firewall.
 
 #### Variables
 
-Currently none.
+|  name     |   description | example | default |
+| --------- | ------------- | ------- | ------- |
+| ferm_enabled | Should ferm be enabled | yes | yes |
+| ferm_ipv6 | Enable ipv6 firewall | yes | yes |
+| ferm_raw_table | Enable raw table filters | yes | yes |
+
 
 Ferm_service
 ---
@@ -40,7 +45,7 @@ Add to role's meta/main.yml
 
 |  name     |   description | example |
 | --------- | ------------- | ------- |
-| name      |	name for service | someservice | 
+| name      |	name for service | someservice |
 | interface | Interface for incoming traffic | eth0 |
 | daddr     | Destination address | 10.0.0.1 |
 | saddr     | Source address | 10.0.0.0/24 |
