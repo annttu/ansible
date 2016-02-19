@@ -480,6 +480,22 @@ In site.yml
     timezone: Europe/Helsinki
 
 
+pam_mkhomedir
+---
+
+Enable pam_mkhomedir
+
+### Variables
+
+No variables.
+
+### example usage
+
+In site.yml
+
+    roles:
+     - pam_mkhomedir
+
 TODO
 ===
 

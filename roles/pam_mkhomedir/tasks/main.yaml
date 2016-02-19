@@ -1,0 +1,15 @@
+---
+
+  - name: Install libpam-modules
+    apt: pkg=libpam-modules state=installed
+    tags:
+      - pam_mkhomedir
+
+  - name: enable pam_mkhomedir
+    lineinfile: >
+      insertafter="^session [ ]*required [ ]*pam_unix.so$"
+      regexp="^session.*pam_mkhomedir.so.*$"
+      line="session required pam_mkhomedir.so umask=0022 skel=/etc/skel"
+      dest=/etc/pam.d/common-session
+    tags:
+      - pam_mkhomedir
